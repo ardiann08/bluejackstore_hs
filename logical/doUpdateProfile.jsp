@@ -24,7 +24,7 @@
 	}
 	
 	if(err.equals("")){
-		query = "update users set password = '"+newpassword+"', phone='"+ phone +"', address='"+address+"'";
+		query = "update users set password = '"+newpassword+"', phone='"+ phone +"', address='"+address+"' where id = " + session.getAttribute("id");
 		st.executeUpdate(query);
 		response.sendRedirect("../view/profile.jsp?error=success to update profile");
 	}else{

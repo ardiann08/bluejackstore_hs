@@ -39,7 +39,7 @@ if(session.getAttribute("role")!=null){
 				<small>Inserted by	:	<%=product.getString("fullname")%></small>
 			</p>
 			<p>
-				<a href="review.jsp">View Product Review</a>
+				<a href="review.jsp?id=<%=product.getString("id")%>">View Product Review</a>
 			</p>
 		</div>
 		<%
