@@ -4,7 +4,13 @@
 if(session.getAttribute("role")!=null){
 %>
 <div class="container">
-	<h1>Products</h1>
+	<div class="col-md-12" style="margin-bottom: 30px;">
+		<h1>Products</h1>
+		<div style="text-align: center;">
+			<a href="addproduct.jsp" class="btn btn-default">Add Product</a>
+		</div>
+	</div>
+	
 	<%
 	String query ="select * from products a , users b where a.postedby = b.id";
 	ResultSet product = st.executeQuery(query); 
