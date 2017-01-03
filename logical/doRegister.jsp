@@ -24,7 +24,7 @@
 	}
 
 	if(err.equals("")){
-		String query = "insert into users values(null, '"+ fullname +"', '"+ phone +"', '"+ email +"', '"+ password +"', '"+ gender +"','"+ birthdate +"', '"+ address +"','user.jpg', 'member')";		
+		String query = "insert into users values(null, '"+ fullname +"', '"+ phone +"', '"+ email +"', '"+ password +"', '"+ gender +"','"+ birthdate +"', '"+ address +"','user.png', 'member')";		
 		st.executeUpdate(query);
 		response.sendRedirect("../view/register.jsp?err=Success to register");
 	}else{
