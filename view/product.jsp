@@ -4,6 +4,7 @@
 if(session.getAttribute("role")!=null){
 %>
 <div class="container">
+	<h1>Products</h1>
 	<%
 	String query ="select * from products a , users b where a.postedby = b.id";
 	ResultSet product = st.executeQuery(query); 
@@ -39,10 +40,11 @@ if(session.getAttribute("role")!=null){
 		if(session.getAttribute("role").equals("member")){
 		%>
 		<div class="col-md-2">
-			<form action="../logical/doProducttoCart.jsp">
+			<form action="../logical/doProducttoCart.jsp" method="post">
+				<input type="hidden" name="id" value="<%=product.getString("id")%>">
 				<div class="col-md-9">
 					<div class="form-group">
-						<input type="number" class="form-control" name="" min="1" max="<%=product.getString("stock")%>">
+						<input type="number" class="form-control" name="qty" value="1" min="1" max="<%=product.getString("stock")%>">
 					</div>
 				</div>
 				

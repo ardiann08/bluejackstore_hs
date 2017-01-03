@@ -64,7 +64,7 @@
         </div>
 
 
-        <%}else if(session.getAttribute("role") != null){%>
+        <%}else if(session.getAttribute("role").equals("admin")){%>
 
         <div class="collapse navbar-collapse js-navbar-collapse">
             <div class="row">
@@ -120,7 +120,7 @@
                 <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
             </div>
         </div><!--end row-->
-        <%}else if(session.getAttribute("role") != null){%>
+        <%}else if(session.getAttribute("role").equals("member")){%>
 
         <div class="collapse navbar-collapse js-navbar-collapse">
             <div class="row">
