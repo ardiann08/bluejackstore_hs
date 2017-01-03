@@ -93,3 +93,11 @@ toggle {
 .err{
     color: red;
 }
+.box{
+    border: 2px dashed red;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+.image-control{
+    max-height: 180px;
+}
