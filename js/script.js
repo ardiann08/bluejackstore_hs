@@ -36,7 +36,7 @@ $(document).ready(function(){
         window.location.href='member.jsp';
     });
 
-    $('#btnTransction').click(function(){
+    $('#btnTransaction').click(function(){
         window.location.href='transaction.jsp';
     });
 

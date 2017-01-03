@@ -4,6 +4,7 @@
 if(session.getAttribute("role")!=null){
 %>
 <div class="container">
+	<h1>Update Product</h1>
 	<%
 	String query ="select * from products where id = "+request.getParameter("id");
 	ResultSet product = st.executeQuery(query); 
