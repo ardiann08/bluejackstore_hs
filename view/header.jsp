@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,12 +59,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 hidden-xs">
-                <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
-            </div>
+        
+        <div class="col-md-12 hidden-xs">
+            <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
         </div>
-
+        
 
         <%}else if(session.getAttribute("role").equals("admin")){%>
 
@@ -115,11 +116,11 @@
                 </div><!--end container-->
             </div><!--end collapse-->
         </div>
-        <div class="row">
-            <div class="col-md-12 hidden-xs">
-                <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
-            </div>
-        </div><!--end row-->
+        
+        <div class="col-md-12 hidden-xs">
+            <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
+        </div>
+        
         <%}else if(session.getAttribute("role").equals("member")){%>
 
         <div class="collapse navbar-collapse js-navbar-collapse">
@@ -178,15 +179,15 @@
                 </div><!--end container-->
             </div><!--end collapse-->
         </div>
-        <div class="row">
-            <div class="col-md-12 hidden-xs">
-                <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
-            </div>
-        </div><!--end row-->
+        
+        <div class="col-md-12 hidden-xs">
+            <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
+        </div>
+        
 
         <%}%>
         <%
-            Integer totaluser =  (Integer)application.getAttribute("totaluser");
+        Integer totaluser =  (Integer)application.getAttribute("totaluser");
         %>
         <div class="col-md-offset-10">
             <h6>user online : <%= totaluser%></h6>
