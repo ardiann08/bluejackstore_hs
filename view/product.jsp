@@ -6,13 +6,30 @@ if(session.getAttribute("role")!=null){
 <div class="container">
 	<div class="col-md-12" style="margin-bottom: 30px;">
 		<h1>Products</h1>
+		<%
+			if(session.getAttribute("role").equals("admin")){
+		%>
 		<div style="text-align: center;">
 			<a href="addproduct.jsp" class="btn btn-default">Add Product</a>
+		</div>
+		<%}%>
+		<div class="pull-left">
+			<form action="" class="form-inline">
+				<div class="form-group">
+					<input type="text" class="form-control" name="query" placeholder="Find Product by Name">		
+				</div>
+				<div class="form-group">
+					<button class="btn btn-default">Search</button>
+				</div>
+			</form>
 		</div>
 	</div>
 	
 	<%
 	String query ="select * from products a , users b where a.postedby = b.id";
+	if(request.getParameter("query")!=null){
+		query+=" and a.nama like '%"+request.getParameter("query")+"%'";
+	}
 	ResultSet product = st.executeQuery(query); 
 	while(product.next()){
 	%>
