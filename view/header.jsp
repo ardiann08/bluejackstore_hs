@@ -63,7 +63,7 @@
         <div class="col-md-12 hidden-xs">
             <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
         </div>
-        
+
 
         <%}else if(session.getAttribute("role").equals("admin")){%>
 
@@ -120,7 +120,7 @@
         <div class="col-md-12 hidden-xs">
             <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
         </div>
-        
+
         <%}else if(session.getAttribute("role").equals("member")){%>
 
         <div class="collapse navbar-collapse js-navbar-collapse">
@@ -183,11 +183,12 @@
         <div class="col-md-12 hidden-xs">
             <toggle href="#" class="glyphicon glyphicon-chevron-down toggle" id="toggle" style="top: -40px"></toggle>
         </div>
-        
+
 
         <%}%>
         <%
-        Integer totaluser =  (Integer)application.getAttribute("totaluser");
+            Integer totaluser =  (Integer)application.getAttribute("totaluser");
+            if(totaluser == null) totaluser = 0;
         %>
         <div class="col-md-offset-10">
             <h6>user online : <%= totaluser%></h6>
