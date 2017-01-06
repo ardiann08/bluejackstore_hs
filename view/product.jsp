@@ -26,10 +26,16 @@ if(session.getAttribute("role")!=null){
 	</div>
 	
 	<%
+	int limit = 5;
+	int offset=0;
 	String query ="select * from products a , users b where a.postedby = b.id";
 	if(request.getParameter("query")!=null){
 		query+=" and a.nama like '%"+request.getParameter("query")+"%'";
 	}
+	if(request.getParameter("page")!=null){
+		offset = (Integer.parseInt(request.getParameter("page"))-1)*limit;
+	}
+	query+=" limit "+limit+" offset "+offset;
 	ResultSet product = st.executeQuery(query); 
 	while(product.next()){
 	%>
@@ -69,9 +75,7 @@ if(session.getAttribute("role")!=null){
 					<div class="form-group">
 						<input type="number" class="form-control" name="qty" value="1" min="1" max="<%=product.getString("stock")%>">
 					</div>
-				</div>
-				
-				
+				</div>			
 				<button class="btn btn-default" style="width: 100%;">Add to Cart <i class="glyphicon glyphicon-shopping-cart"></i></button>
 			</form>
 		</div>
@@ -86,9 +90,62 @@ if(session.getAttribute("role")!=null){
 				<button class="btn btn-default">Delete <i class="glyphicon glyphicon-minus-sign"></i></button>
 			</form>
 		</div>
-		<%}%>
-		
+		<%}%>	
 	</div>
 	<%}%>
+	<div class="col-md-12 text-center">
+		<nav aria-label="Page navigation">
+			<ul class="pagination">
+				<%if(offset!=0){%>
+				<li>
+					<a href="product.jsp?page=<%=Integer.parseInt(request.getParameter("page"))-1%><%if(request.getParameter("query")!=null)out.print("&query="+request.getParameter("query"));%>" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<%}%>
+				<%
+					String query2="select count(id)'count' from products";
+					if(request.getParameter("query")!=null){
+						query2+=" where nama like '%"+request.getParameter("query")+"%'";
+					}
+					ResultSet counter = stmt.executeQuery(query2);
+					int total = 0;
+					boolean last = false;
+					int current =0;
+					if(counter.next()){
+						total=Integer.parseInt(counter.getString("count"));
+					}
+					if(total%limit!=0){
+						total/=limit;
+						total+=1;
+					}else{
+						total/=limit;
+					}
+					if(request.getParameter("page")!=null){
+						if(Integer.parseInt(request.getParameter("page"))==total){
+							last=true;
+						}
+						current=Integer.parseInt(request.getParameter("page"));
+					}else{
+						if(total==1){
+							last=true;
+						}
+					}
+					for(int i=0;i<total;i++){
+				%>
+				<li><a href="product.jsp?page=<%=i+1%><%if(request.getParameter("query")!=null)out.print("&query="+request.getParameter("query"));%>"><%=i+1%></a></li>
+				<%}%>
+				<%if(last==false){%>
+				<li>
+					<a href="product.jsp?page=<%=current+1%><%if(request.getParameter("query")!=null)out.print("&query="+request.getParameter("query"));%>" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				<%}%>
+			</ul>
+		</nav>
+	</div>
+	
+	
 </div>
 <%}%>

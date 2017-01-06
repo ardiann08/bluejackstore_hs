@@ -7,7 +7,16 @@ if(session.getAttribute("role")!=null){
 	<h1>Transactions</h1>
 	
 	<%
+	int limit = 5;
+	int offset=0;
 	String query ="select * from transactions a , users b where a.iduser = b.id";
+	if(session.getAttribute("role").equals("member")){
+		query+=" and a.iduser = "+session.getAttribute("userid");
+	}
+	if(request.getParameter("page")!=null){
+		offset = (Integer.parseInt(request.getParameter("page"))-1)*limit;
+	}
+	query+=" limit "+limit+" offset "+offset;
 	ResultSet transactions = st.executeQuery(query); 
 	while(transactions.next()){
 	%>
@@ -55,5 +64,57 @@ if(session.getAttribute("role")!=null){
 		<%}%>
 	</div>
 	<%}%>
+	<div class="col-md-12 text-center">
+		<nav aria-label="Page navigation">
+			<ul class="pagination">
+				<%if(offset!=0){%>
+				<li>
+					<a href="transaction.jsp?page=<%=Integer.parseInt(request.getParameter("page"))-1%>" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<%}%>
+				<%
+					String query2="select count(id)'count' from transactions";
+					if(session.getAttribute("role").equals("member")){
+						query2+=" and a.iduser = "+session.getAttribute("userid");
+					}
+					ResultSet counter = stmt.executeQuery(query2);
+					int total = 0;
+					boolean last = false;
+					int current =0;
+					if(counter.next()){
+						total=Integer.parseInt(counter.getString("count"));
+					}
+					if(total%limit!=0){
+						total/=limit;
+						total+=1;
+					}else{
+						total/=limit;
+					}
+					if(request.getParameter("page")!=null){
+						if(Integer.parseInt(request.getParameter("page"))==total){
+							last=true;
+						}
+						current=Integer.parseInt(request.getParameter("page"));
+					}else{
+						if(total==1){
+							last=true;
+						}
+					}
+					for(int i=0;i<total;i++){
+				%>
+				<li><a href="transaction.jsp?page=<%=i+1%>"><%=i+1%></a></li>
+				<%}%>
+				<%if(last==false){%>
+				<li>
+					<a href="transaction.jsp?page=<%=current+1%>" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				<%}%>
+			</ul>
+		</nav>
+	</div>
 </div>
 <%}%>
